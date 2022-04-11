@@ -1,0 +1,28 @@
+.board-container {
+    padding: 20px;
+    margin: 60px;
+    display: flex;
+    position: center;
+    flex-direction: column;
+    outline-color: black;
+    outline-width: 3px;
+}
+
+.row {
+    display:flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+
+.cell {
+    background: #9a9a9a;
+    width: 20px;
+    height: 20px;
+}
+
+.living.cell {
+    background: #ff0000;
+    width: 20px;
+    height: 20px;
+}
