@@ -16,9 +16,11 @@
 
 
 .cell {
-    background: #9a9a9a;
+    background: #ffffff;
     width: 20px;
     height: 20px;
+    border-style: solid;
+    border-color: #a6a6a6;
 }
 
 .living.cell {
