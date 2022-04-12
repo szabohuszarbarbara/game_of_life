@@ -5,26 +5,19 @@
 
 // adjust board size custom vs full screen
 
-// add init cells
-
 // start game / stop / pause / restart / quit
 
 
-let intervalTime = 1000
+let intervalTime
 
 let initRow = 30
 let initCol = 30
-//
-// const gameInterval = setInterval(checkLivingCells, intervalTime)
+let gameInterval
 
 
 function startGame() {
     changeButtons();
-    // gameInterval;
-    setInterval(markLivingCells, intervalTime)
-
-
-
+    gameInterval = setInterval(markLivingCells, intervalTime=1000);
 }
 
 function checkNeightbours(cell) {
@@ -35,6 +28,43 @@ function checkNeightbours(cell) {
     const lowerRow = row+1
     const leftCol = col-1
     const rightCol = col+1
+
+    // if (row > 0) {
+    //     const upperLeftNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${leftCol}"]`)
+    //     if (upperLeftNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const upperNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${col}"]`)
+    //     if (upperNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const upperRightNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${rightCol}"]`)
+    //     if (upperRightNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const leftNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${leftCol}"]`)
+    //     if (leftNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const rightNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${rightCol}"]`)
+    //     if (rightNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const lowerLeftNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${leftCol}"]`)
+    //     if (lowerLeftNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const lowerNeighbour = document.querySelector(`[data-row="${lowerRow}"][data-col="${col}"]`)
+    //     if (lowerNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    //     const lowerRightNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${rightCol}"]`)
+    //     if (lowerRightNeighbour.classList.contains("living")) {
+    //         livingCell ++
+    //     }
+    // }
+
+
 
     if (row > 0 && row < initRow-1 && col > 0 && col < initCol-1) {
         const upperLeftNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${leftCol}"]`)
@@ -95,20 +125,17 @@ function markLivingCells() {
     for (let cell of cells) {
         const livingCellNeighbourCount = checkNeightbours(cell)
         if (cell.classList.contains("living") && livingCellNeighbourCount === 2) {
-        console.log("still")}
+        }
         else if (cell.classList.contains("living") && livingCellNeighbourCount === 3) {
-        console.log("still")}
+        }
         else if (cell.className !== "living" && livingCellNeighbourCount === 3) {
             cell.classList.add("born")
-            console.log("get alive")
         }
         else {cell.classList.add("dead")
-            console.log("dead")
         }
     }
     endGeneration()
 }
-
 
 
 function changeButtons() {
@@ -135,7 +162,13 @@ function changeButtons() {
 }
 
 function slower() {
-
+    clearInterval(gameInterval)
+    if (intervalTime >= 4000) {
+        intervalTime = 4000
+    } else {
+        intervalTime = intervalTime * 2
+    }
+    gameInterval = setInterval(markLivingCells, intervalTime)
 }
 
 function stop() {
@@ -143,7 +176,13 @@ function stop() {
 }
 
 function faster() {
-
+    clearInterval(gameInterval)
+        if (intervalTime <= 125) {
+        intervalTime = 125
+    } else {
+        intervalTime = intervalTime/ 2
+    }
+    gameInterval = setInterval(markLivingCells, intervalTime)
 }
 
 function setLivingCells(clickEvent) {
