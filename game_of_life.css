@@ -17,14 +17,19 @@
 
 .cell {
     background: #ffffff;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
     border-style: solid;
     border-color: #a6a6a6;
 }
 
 .living.cell {
     background: #ff0000;
-    width: 20px;
-    height: 20px;
+    width: 15px;
+    height: 15px;
+}
+
+
+.start-button {
+    color: #ff5353;
 }
