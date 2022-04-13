@@ -20,7 +20,7 @@ function startGame() {
     gameInterval = setInterval(markLivingCells, intervalTime=1000);
 }
 
-function checkNeightbours(cell) {
+function checkNeighbours(cell) {
     const row = Number(cell.dataset.row)
     const col = Number(cell.dataset.col)
     let livingCell = 0
@@ -29,78 +29,14 @@ function checkNeightbours(cell) {
     const leftCol = col-1
     const rightCol = col+1
 
-    // if (row > 0) {
-    //     const upperLeftNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${leftCol}"]`)
-    //     if (upperLeftNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const upperNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${col}"]`)
-    //     if (upperNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const upperRightNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${rightCol}"]`)
-    //     if (upperRightNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const leftNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${leftCol}"]`)
-    //     if (leftNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const rightNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${rightCol}"]`)
-    //     if (rightNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const lowerLeftNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${leftCol}"]`)
-    //     if (lowerLeftNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const lowerNeighbour = document.querySelector(`[data-row="${lowerRow}"][data-col="${col}"]`)
-    //     if (lowerNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    //     const lowerRightNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${rightCol}"]`)
-    //     if (lowerRightNeighbour.classList.contains("living")) {
-    //         livingCell ++
-    //     }
-    // }
-
-
-
-    if (row > 0 && row < initRow-1 && col > 0 && col < initCol-1) {
-        const upperLeftNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${leftCol}"]`)
-        if (upperLeftNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const upperNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${col}"]`)
-        if (upperNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const upperRightNeighbour = document.querySelector(`.cell[data-row="${upperRow}"][data-col="${rightCol}"]`)
-        if (upperRightNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const leftNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${leftCol}"]`)
-        if (leftNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const rightNeighbour = document.querySelector(`.cell[data-row="${row}"][data-col="${rightCol}"]`)
-        if (rightNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const lowerLeftNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${leftCol}"]`)
-        if (lowerLeftNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const lowerNeighbour = document.querySelector(`[data-row="${lowerRow}"][data-col="${col}"]`)
-        if (lowerNeighbour.classList.contains("living")) {
-            livingCell ++
-        }
-        const lowerRightNeighbour = document.querySelector(`.cell[data-row="${lowerRow}"][data-col="${rightCol}"]`)
-        if (lowerRightNeighbour.classList.contains("living")) {
-            livingCell ++
+    for (let i = Math.max(0, upperRow); i <= Math.min(initRow-1, lowerRow); i++) {
+        for (let j = Math.max(0, leftCol); j <= Math.min(initCol-1, rightCol); j++) {
+            if (i === row && j === col) {continue}
+            let currentNeighbour = document.querySelector(`.cell[data-row="${i}"][data-col="${j}"]`)
+            if (currentNeighbour.classList.contains("living")) {
+            livingCell ++ }
         }
     }
-
     return livingCell
 
 }
@@ -123,7 +59,7 @@ function endGeneration() {
 function markLivingCells() {
     const cells = document.querySelectorAll(".cell")
     for (let cell of cells) {
-        const livingCellNeighbourCount = checkNeightbours(cell)
+        const livingCellNeighbourCount = checkNeighbours(cell)
         if (cell.classList.contains("living") && livingCellNeighbourCount === 2) {
         }
         else if (cell.classList.contains("living") && livingCellNeighbourCount === 3) {
@@ -186,8 +122,7 @@ function faster() {
 }
 
 function setLivingCells(clickEvent) {
-    const cell = clickEvent.currentTarget
-    cell.classList.toggle("living")
+    clickEvent.currentTarget.classList.toggle("living")
 }
 
 function drawBoard(row, col) {
@@ -228,7 +163,6 @@ function init() {
     drawStartButton()
     drawBoard(initRow, initCol)
     alert("Please set the living cells by clicking on them! When you finished click OK!")
-    setLivingCells()
 }
 
 
