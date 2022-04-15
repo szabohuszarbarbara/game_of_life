@@ -1,6 +1,5 @@
 .board-container {
     padding: 20px;
-    margin: 60px;
     display: flex;
     position: center;
     flex-direction: column;
@@ -23,10 +22,8 @@
     border-color: #a6a6a6;
 }
 
-.living.cell {
-    background: #ff0000;
-    width: 15px;
-    height: 15px;
+.living {
+    background: hsla(0, 80%, 50%, 100%);
 }
 
 
